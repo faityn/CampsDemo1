@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #0d0e0b;
+}
+body {
+  margin: 0;
+  background: #0d0e0b;
+  color: #fff;
+}
+::selection {
+  background: #fff;
+  color: #0d0e0b;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.destination-page {
+  --bg: #101713;
+  --surface: rgba(255, 255, 255, 0.04);
+  --ink: #f4f0e6;
+  --muted: rgba(244, 240, 230, 0.58);
+  --line: rgba(244, 240, 230, 0.16);
+  background: var(--bg);
+  color: var(--ink);
+  transition: background-color 500ms ease;
+}
+
+.destination-page h1,
+.destination-page h2,
+.destination-page h3,
+.destination-page .overview > p:first-child {
+  font-family: var(--display-font, Georgia, serif);
+}
+
+.theme-alungoo {
+  --bg: #d9a06f;
+  --surface: rgba(105, 55, 30, 0.1);
+  --ink: #4c2d20;
+  --muted: rgba(76, 45, 32, 0.66);
+  --line: rgba(105, 55, 30, 0.24);
+  --display-font: Georgia, serif;
+  background-image: linear-gradient(135deg, #f0d2b2 0%, #d89b68 100%);
+}
+
+.theme-guru {
+  --bg: #e8f0e2;
+  --surface: rgba(41, 94, 57, 0.08);
+  --ink: #183b28;
+  --muted: rgba(24, 59, 40, 0.64);
+  --line: rgba(41, 94, 57, 0.22);
+  --display-font: Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(135deg, #e8f0e2 0%, #dcebd9 100%);
+}
+
+.theme-hoyor-zagal {
+  --bg: #251b14;
+  --surface: rgba(224, 184, 120, 0.09);
+  --ink: #f7d9a6;
+  --muted: rgba(247, 217, 166, 0.62);
+  --line: rgba(224, 184, 120, 0.25);
+  --display-font: Georgia, serif;
+}
+
+.destination-details {
+  --bg: #fff;
+  --ink: #1c241f;
+  --muted: rgba(28, 36, 31, 0.62);
+  --line: rgba(28, 36, 31, 0.16);
+  --surface: #f6f7f2;
+  background: #fff;
+  color: var(--ink);
+}
+
+.destination-theme-section {
+  --bg: var(--theme-bg);
+  --ink: var(--theme-ink);
+  --muted: var(--theme-muted);
+  --line: var(--theme-line);
+  --surface: var(--theme-surface);
+  position: relative;
+  isolation: isolate;
+  padding: 4rem 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.destination-theme-section::before {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  content: "";
+  transform: translateX(-50%);
+}
+
+@media (min-width: 768px) {
+  .destination-white-section {
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+}
+
+.theme-alungoo .destination-details {
+  --theme-bg: #d9a06f;
+  --theme-ink: #4c2d20;
+  --theme-muted: rgba(76, 45, 32, 0.66);
+  --theme-line: rgba(105, 55, 30, 0.24);
+  --theme-surface: rgba(105, 55, 30, 0.1);
+  --ink: #6e3a21;
+  --muted: rgba(110, 58, 33, 0.66);
+  --line: rgba(144, 76, 38, 0.24);
+  --surface: #fff5e9;
+}
+
+.theme-alungoo .destination-theme-section h2,
+.theme-alungoo .destination-theme-section h3 {
+  color: #4c2d20;
+}
+
+.theme-alungoo .destination-theme-section article {
+  border-color: rgba(105, 55, 30, 0.24);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.theme-guru .destination-details {
+  --theme-bg: #e8f0e2;
+  --theme-ink: #183b28;
+  --theme-muted: rgba(24, 59, 40, 0.64);
+  --theme-line: rgba(41, 94, 57, 0.22);
+  --theme-surface: rgba(41, 94, 57, 0.08);
+  --ink: #183b28;
+  --muted: rgba(24, 59, 40, 0.64);
+  --line: rgba(41, 94, 57, 0.22);
+  --surface: #f1f6ed;
+}
+
+.theme-guru .destination-theme-section h2,
+.theme-guru .destination-theme-section h3 {
+  color: #183b28;
+}
+
+.theme-guru .destination-theme-section article {
+  border-color: rgba(24, 59, 40, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 45px rgba(24, 59, 40, 0.08);
+}
+
+.theme-hoyor-zagal .destination-details {
+  --theme-bg: #251b14;
+  --theme-ink: #f7d9a6;
+  --theme-muted: rgba(247, 217, 166, 0.62);
+  --theme-line: rgba(224, 184, 120, 0.25);
+  --theme-surface: rgba(224, 184, 120, 0.09);
+  --ink: #57351d;
+  --muted: rgba(87, 53, 29, 0.66);
+  --line: rgba(163, 111, 55, 0.3);
+  --surface: #fcf6eb;
+}
+
+.theme-hoyor-zagal .destination-theme-section h2,
+.theme-hoyor-zagal .destination-theme-section h3 {
+  color: #f7d9a6;
+}
+
+.theme-hoyor-zagal .destination-theme-section article {
+  border-color: rgba(224, 184, 120, 0.3);
+  background: rgba(224, 184, 120, 0.08);
+}
