@@ -45,7 +45,7 @@ export const destinations: Destination[] = [
     signature: "A bold desert camp for wide skies and elemental days.",
     description:
       "Where rolling dunes meet the endless steppe for an unforgettable desert retreat.",
-    image: "/images/hoyorzagal/g1.jpg",
+    image: "/images/hoyorzagal/g1.JPG",
     accent: "#e0b878",
     logo: "/images/hoyorzagal/logo.png",
     logoMark: "03",
