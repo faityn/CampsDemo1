@@ -93,7 +93,7 @@ export const destinations: Destination[] = [
       "/images/hoyorzagal/2.jpg",
       "/images/hoyorzagal/g4.jpg",
       "/images/hoyorzagal/g5.jpg",
-      "/images/hoyorzagal/g1.jpg",
+      "/images/hoyorzagal/g1.JPG",
       "/images/hoyorzagal/g6.jpg",
     ],
     stay: [
