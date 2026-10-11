@@ -36,7 +36,7 @@ export default function AdminRichTextEditor({
         branding: false,
         promotion: false,
         content_style:
-          "body { font-family: Arial, sans-serif; font-size: 14px; color: #1a1d20; background: #fff; margin: 12px; }",
+          "body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; color: #1a1d20; background: #fff; margin: 12px; }",
       }}
     />
   );

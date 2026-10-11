@@ -124,7 +124,7 @@ export default function ResortHero({
           </p>
           <h1
             className={[
-              "font-serif",
+              "font-sans font-normal",
               preview ? "text-4xl md:text-5xl" : "text-6xl md:text-[120px]",
             ].join(" ")}
           >

@@ -6,7 +6,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["Noto Sans", "Arial", "Helvetica", "sans-serif"],
-        serif: ["Noto Serif", "Georgia", "Times New Roman", "serif"],
+        serif: ["Noto Sans", "Arial", "Helvetica", "sans-serif"],
       },
     },
   },

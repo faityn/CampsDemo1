@@ -199,7 +199,7 @@ export default function Intro({
                       >
                         {d.eyebrow}
                       </p>
-                      <h3 className="font-serif text-5xl">{d.name}</h3>
+                      <h3 className="font-sans font-normal text-5xl">{d.name}</h3>
                       <div className="mt-5 flex items-center justify-between gap-5">
                         <p className="max-w-sm text-xs leading-5 text-white/65">
                           {d.description}
