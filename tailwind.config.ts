@@ -5,8 +5,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Arial", "Helvetica", "sans-serif"],
-        serif: ["Georgia", "Times New Roman", "serif"],
+        sans: ["Noto Sans", "Arial", "Helvetica", "sans-serif"],
+        serif: ["Noto Serif", "Georgia", "Times New Roman", "serif"],
       },
     },
   },

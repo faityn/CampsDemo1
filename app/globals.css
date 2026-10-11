@@ -1,3 +1,16 @@
+@import "@fontsource/noto-sans/latin-400.css";
+@import "@fontsource/noto-sans/latin-500.css";
+@import "@fontsource/noto-sans/latin-600.css";
+@import "@fontsource/noto-sans/latin-700.css";
+@import "@fontsource/noto-sans/cyrillic-400.css";
+@import "@fontsource/noto-sans/cyrillic-500.css";
+@import "@fontsource/noto-sans/cyrillic-600.css";
+@import "@fontsource/noto-sans/cyrillic-700.css";
+@import "@fontsource/noto-serif/latin-400.css";
+@import "@fontsource/noto-serif/latin-700.css";
+@import "@fontsource/noto-serif/cyrillic-400.css";
+@import "@fontsource/noto-serif/cyrillic-700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +22,7 @@ body {
   margin: 0;
   background: #0d0e0b;
   color: #fff;
+  font-family: "Noto Sans", Arial, sans-serif;
 }
 ::selection {
   background: #fff;
@@ -36,7 +50,7 @@ html {
 .destination-page h2,
 .destination-page h3,
 .destination-page .overview > p:first-child {
-  font-family: var(--display-font, Georgia, serif);
+  font-family: var(--display-font, "Noto Serif", Georgia, serif);
 }
 
 .theme-alungoo {
@@ -45,7 +59,7 @@ html {
   --ink: #4c2d20;
   --muted: rgba(76, 45, 32, 0.66);
   --line: rgba(105, 55, 30, 0.24);
-  --display-font: Georgia, serif;
+  --display-font: "Noto Serif", Georgia, serif;
   background-image: linear-gradient(135deg, #f0d2b2 0%, #d89b68 100%);
 }
 
@@ -55,7 +69,7 @@ html {
   --ink: #183b28;
   --muted: rgba(24, 59, 40, 0.64);
   --line: rgba(41, 94, 57, 0.22);
-  --display-font: Arial, Helvetica, sans-serif;
+  --display-font: "Noto Sans", Arial, Helvetica, sans-serif;
   background-image: linear-gradient(135deg, #e8f0e2 0%, #dcebd9 100%);
 }
 
@@ -65,7 +79,7 @@ html {
   --ink: #f7d9a6;
   --muted: rgba(247, 217, 166, 0.62);
   --line: rgba(224, 184, 120, 0.25);
-  --display-font: Georgia, serif;
+  --display-font: "Noto Serif", Georgia, serif;
 }
 
 .destination-details {

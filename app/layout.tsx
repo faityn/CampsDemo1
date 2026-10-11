@@ -1,9 +1,12 @@
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { LocaleProvider } from "@/i18n/LocaleProvider";
 
 export const metadata = {
-  title: "Integrated tourism lodges",
-  description: "Three distinctive escapes across Mongolia.",
+  title: "Mongolian Camps | Монголын аяллын баазууд",
+  description:
+    "Discover distinctive stays across Mongolia. Монгол орны өвөрмөц аяллын баазуудтай танилцаарай.",
 };
 
 export default function RootLayout({
@@ -14,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <LocaleProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </LocaleProvider>
       </body>
     </html>
   );
