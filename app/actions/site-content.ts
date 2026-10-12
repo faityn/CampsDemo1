@@ -46,6 +46,14 @@ function getString(formData: FormData, key: string, fallback: string): string {
   return value === null || value === undefined ? fallback : String(value);
 }
 
+function getColor(formData: FormData, key: string, fallback: string): string {
+  const value = getString(formData, key, fallback);
+  if (!/^#[\da-f]{6}$/i.test(value)) {
+    throw new Error(`${key} must be a valid six-digit hex color.`);
+  }
+  return value;
+}
+
 function parseObjectList(formData: FormData, key: string): Record<string, unknown>[] | null {
   const value = formData.get(key);
   if (value === null) {
@@ -129,6 +137,13 @@ export async function seedDefaultContent() {
       about_image: destination.aboutImage,
       image: destination.image,
       accent: destination.accent,
+      hero_gradient_color: destination.heroGradientColor,
+      theme_background: destination.themeBackground,
+      theme_text: destination.themeText,
+      content_background: destination.contentBackground,
+      content_text: destination.contentText,
+      muted_color: destination.mutedColor,
+      line_color: destination.lineColor,
       logo: destination.logo,
       logo_mark: destination.logoMark,
       map_url: destination.mapUrl,
@@ -337,10 +352,42 @@ export async function saveResortContent(formData: FormData) {
   const fallback = destinations.find((destination) => destination.slug === slug) ?? destinations[0];
   let stayData: Record<string, unknown>[] | null;
   let activityData: Record<string, unknown>[] | null;
+  let colors: {
+    accent: string;
+    heroGradientColor: string;
+    themeBackground: string;
+    themeText: string;
+    contentBackground: string;
+    contentText: string;
+    mutedColor: string;
+    lineColor: string;
+  };
 
   try {
     stayData = parseObjectList(formData, "stay");
     activityData = parseObjectList(formData, "activities");
+    colors = {
+      accent: getColor(formData, "accent", fallback.accent),
+      heroGradientColor: getColor(
+        formData,
+        "heroGradientColor",
+        fallback.heroGradientColor,
+      ),
+      themeBackground: getColor(
+        formData,
+        "themeBackground",
+        fallback.themeBackground,
+      ),
+      themeText: getColor(formData, "themeText", fallback.themeText),
+      contentBackground: getColor(
+        formData,
+        "contentBackground",
+        fallback.contentBackground,
+      ),
+      contentText: getColor(formData, "contentText", fallback.contentText),
+      mutedColor: getColor(formData, "mutedColor", fallback.mutedColor),
+      lineColor: getColor(formData, "lineColor", fallback.lineColor),
+    };
   } catch (error) {
     return {
       ok: false,
@@ -362,7 +409,14 @@ export async function saveResortContent(formData: FormData) {
     description_mn: sanitizeRichText(getString(formData, "descriptionMn", fallback.description)),
     about_image: getString(formData, "aboutImage", fallback.aboutImage),
     image: getString(formData, "image", fallback.image),
-    accent: getString(formData, "accent", fallback.accent),
+    accent: colors.accent,
+    hero_gradient_color: colors.heroGradientColor,
+    theme_background: colors.themeBackground,
+    theme_text: colors.themeText,
+    content_background: colors.contentBackground,
+    content_text: colors.contentText,
+    muted_color: colors.mutedColor,
+    line_color: colors.lineColor,
     logo: getString(formData, "logo", fallback.logo),
     logo_mark: getString(formData, "logoMark", fallback.logoMark),
     map_url: getString(formData, "mapUrl", fallback.mapUrl),

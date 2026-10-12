@@ -6,6 +6,8 @@ import {
 } from "@/app/actions/site-content";
 import { destinations, type Destination } from "@/data/destinations";
 import { localizeDestination } from "@/data/destination-locales";
+import { getDestinationThemeStyle } from "@/lib/destination-theme";
+import AdminHexColorPicker from "@/components/admin/AdminHexColorPicker";
 import ResortHero from "@/components/ResortHero";
 import AdminRichTextEditor from "@/components/admin/AdminRichTextEditor";
 import LocationPicker from "@/components/admin/LocationPicker";
@@ -23,6 +25,17 @@ const tabs = [
   { id: "location", label: "Location" },
   { id: "contact", label: "Contact us" },
 ];
+
+const campColorFields = [
+  ["accent", "Accent"],
+  ["heroGradientColor", "Hero gradient start"],
+  ["themeBackground", "Theme background"],
+  ["themeText", "Theme text"],
+  ["contentBackground", "Content background"],
+  ["contentText", "Content text"],
+  ["mutedColor", "Muted text"],
+  ["lineColor", "Borders and dividers"],
+] as const;
 
 type CloudinaryImage = {
   publicId: string;
@@ -508,6 +521,14 @@ export default function ResortDetailPage() {
     data.set("description", form.description);
     data.set("descriptionMn", form.descriptionMn ?? form.description);
     data.set("image", form.image);
+    data.set("accent", form.accent);
+    data.set("heroGradientColor", form.heroGradientColor);
+    data.set("themeBackground", form.themeBackground);
+    data.set("themeText", form.themeText);
+    data.set("contentBackground", form.contentBackground);
+    data.set("contentText", form.contentText);
+    data.set("mutedColor", form.mutedColor);
+    data.set("lineColor", form.lineColor);
     data.set("aboutImage", form.aboutImage);
     data.set("mapUrl", form.mapUrl);
     data.set("mapCenter", form.mapCenter);
@@ -712,10 +733,32 @@ export default function ResortDetailPage() {
                 </div>
               </div>
             </div>
+            <div className="rounded-[14px] border border-[#e3dfd8] bg-white p-4">
+              <h3 className="mb-3 text-sm font-semibold text-[#1d2124]">
+                Camp Colors
+              </h3>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {campColorFields.map(([field, label]) => (
+                  <div
+                    key={field}
+                    className="flex items-center justify-between gap-3 rounded-md border border-[#dfe2df] px-3 py-2 text-sm text-[#4b5860]"
+                  >
+                    <span>{label}</span>
+                    <AdminHexColorPicker
+                      label={label}
+                      value={form[field]}
+                      fallback={initial[field]}
+                      onChange={(value) => updateForm(field, value)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div
             className={`destination-page theme-${form.theme} overflow-hidden rounded-[14px] border border-[#e3dfd8] p-3`}
+            style={getDestinationThemeStyle(form)}
           >
             <div className="mb-3 text-[12px] uppercase tracking-[0.18em] text-[#6b7379]">
               Preview
@@ -725,6 +768,67 @@ export default function ResortDetailPage() {
                 destination={localizeDestination(form, "en")}
                 preview
               />
+            </div>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div
+                className="min-h-32 rounded-[12px] p-4"
+                style={{
+                  backgroundColor: form.themeBackground,
+                  color: form.themeText,
+                }}
+              >
+                <p className="text-[10px] uppercase tracking-[0.18em] opacity-70">
+                  Theme background + text
+                </p>
+                <p className="mt-5 text-lg font-semibold">
+                  {form.name || "Camp name"}
+                </p>
+                <p className="mt-1 text-sm opacity-80">
+                  {form.signature || "Sample text on the theme background"}
+                </p>
+              </div>
+              <div
+                className="min-h-32 rounded-[12px] border border-[#e1ddd7] p-4"
+                style={{
+                  backgroundColor: form.contentBackground,
+                  color: form.contentText,
+                }}
+              >
+                <p className="text-[10px] uppercase tracking-[0.18em] opacity-70">
+                  Content background + text
+                </p>
+                <p className="mt-5 text-lg font-semibold">
+                  About {form.name || "the camp"}
+                </p>
+                <p className="mt-1 text-sm opacity-80">
+                  Sample content text on the content background.
+                </p>
+              </div>
+              <div
+                className="min-h-32 rounded-[12px] border p-4 sm:col-span-2"
+                style={{
+                  backgroundColor: form.contentBackground,
+                  color: form.contentText,
+                  borderColor: form.lineColor,
+                }}
+              >
+                <p className="text-[10px] uppercase tracking-[0.18em]">
+                  Muted text + borders and dividers
+                </p>
+                <p
+                  className="mt-3 text-sm"
+                  style={{ color: form.mutedColor }}
+                >
+                  {form.signature || "Sample muted text"}
+                </p>
+                <div
+                  className="my-4 border-t"
+                  style={{ borderColor: form.lineColor }}
+                />
+                <p className="text-xs" style={{ color: form.mutedColor }}>
+                  Divider color preview
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1180,9 +1284,7 @@ export default function ResortDetailPage() {
               </label>
               <AdminRichTextEditor
                 value={form.aboutText.join("\n\n")}
-                onChange={(value) =>
-                  updateForm("aboutText", [value])
-                }
+                onChange={(value) => updateForm("aboutText", [value])}
               />
             </div>
             <div>
@@ -1191,9 +1293,7 @@ export default function ResortDetailPage() {
               </label>
               <AdminRichTextEditor
                 value={(form.aboutTextMn ?? form.aboutText).join("\n\n")}
-                onChange={(value) =>
-                  updateForm("aboutTextMn", [value])
-                }
+                onChange={(value) => updateForm("aboutTextMn", [value])}
               />
             </div>
           </div>

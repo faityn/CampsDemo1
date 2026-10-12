@@ -29,6 +29,13 @@ export type Destination = {
   aboutImage: string;
   image: string;
   accent: string;
+  heroGradientColor: string;
+  themeBackground: string;
+  themeText: string;
+  contentBackground: string;
+  contentText: string;
+  mutedColor: string;
+  lineColor: string;
   logo: string;
   logoMark: string;
   mapUrl: string;
@@ -67,6 +74,13 @@ export const destinations: Destination[] = [
     aboutImage: "/images/hoyorzagal/31.JPG",
     image: "/images/hoyorzagal/31.JPG",
     accent: "#e0b878",
+    heroGradientColor: "#0d0e0b",
+    themeBackground: "#251b14",
+    themeText: "#f7d9a6",
+    contentBackground: "#ffffff",
+    contentText: "#57351d",
+    mutedColor: "#875f39",
+    lineColor: "#d2b47e",
     logo: "/images/hoyorzagal/logo.png",
     logoMark: "03",
     mapUrl:
@@ -179,6 +193,13 @@ export const destinations: Destination[] = [
     aboutImage: "/images/alungoo/30.JPG",
     image: "/images/alungoo/30.JPG",
     accent: "#b96535",
+    heroGradientColor: "#6e3a21",
+    themeBackground: "#d9a06f",
+    themeText: "#4c2d20",
+    contentBackground: "#ffffff",
+    contentText: "#6e3a21",
+    mutedColor: "#9b6b4a",
+    lineColor: "#c58c5e",
     logo: "/images/alungoo/logo.png",
     logoMark: "01",
     mapUrl:
@@ -289,6 +310,13 @@ export const destinations: Destination[] = [
     aboutImage: "/images/guru/hero.png",
     image: "/images/guru/hero.png",
     accent: "#b9d98b",
+    heroGradientColor: "#183b28",
+    themeBackground: "#e8f0e2",
+    themeText: "#183b28",
+    contentBackground: "#ffffff",
+    contentText: "#183b28",
+    mutedColor: "#66806b",
+    lineColor: "#a9c0a6",
     logo: "/images/guru/logo.png",
     logoMark: "02",
     mapUrl:

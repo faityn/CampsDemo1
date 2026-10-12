@@ -15,8 +15,6 @@ export default function ResortHero({
 }) {
   const { t } = useLocale();
   const filterId = `destination-logo-${useId().replace(/:/g, "")}`;
-  const eyebrowAccent =
-    destination.theme === "hoyor-zagal" ? "#6e3a21" : destination.accent;
 
   return (
     <section
@@ -32,13 +30,10 @@ export default function ResortHero({
       />
       <div className="absolute inset-0 bg-black/5" />
       <div
-        className={`absolute inset-0 bg-gradient-to-t ${
-          destination.theme === "guru"
-            ? "from-[#183b28]/75"
-            : destination.theme === "alungoo"
-              ? "from-[#6e3a21]/75"
-              : "from-[#0d0e0b]/75"
-        } via-transparent to-black/5`}
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `linear-gradient(to top, color-mix(in srgb, ${destination.heroGradientColor} 75%, transparent), transparent, rgb(0 0 0 / 0.05))`,
+        }}
       />
       {!preview && (
         <div className="absolute right-6 top-7 z-10 flex items-center gap-5 md:right-12">
@@ -65,10 +60,7 @@ export default function ResortHero({
               : "h-24 w-24 p-2 md:h-32 md:w-32 md:p-4",
           ].join(" ")}
           style={{
-            borderColor:
-              destination.theme === "hoyor-zagal"
-                ? "#6e3a21"
-                : destination.accent,
+            borderColor: destination.accent,
           }}
         >
           <svg aria-hidden="true" className="absolute h-0 w-0">
@@ -86,13 +78,7 @@ export default function ResortHero({
                   result="logoMask"
                 />
                 <feFlood
-                  floodColor={
-                    destination.theme === "hoyor-zagal"
-                      ? "#6e3a21"
-                      : destination.theme === "guru"
-                        ? "#2f8f57"
-                        : destination.accent
-                  }
+                  floodColor={destination.accent}
                 />
                 <feComposite in2="logoMask" operator="in" />
               </filter>
@@ -116,8 +102,8 @@ export default function ResortHero({
           <p
             className="mb-3 inline-flex rounded-sm border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.4em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] shadow-lg backdrop-blur-sm"
             style={{
-              backgroundColor: `color-mix(in srgb, ${eyebrowAccent} 55%, transparent)`,
-              borderColor: `color-mix(in srgb, ${eyebrowAccent} 80%, transparent)`,
+              backgroundColor: `color-mix(in srgb, ${destination.accent} 55%, transparent)`,
+              borderColor: `color-mix(in srgb, ${destination.accent} 80%, transparent)`,
             }}
           >
             {destination.eyebrow}

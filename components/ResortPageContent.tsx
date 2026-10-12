@@ -5,6 +5,7 @@ import ResortHero from "@/components/ResortHero";
 import SafeRichText from "@/components/SafeRichText";
 import { localizeDestination } from "@/data/destination-locales";
 import type { Destination } from "@/data/destinations";
+import { getDestinationThemeStyle } from "@/lib/destination-theme";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function ResortPageContent({
@@ -18,6 +19,7 @@ export default function ResortPageContent({
   return (
     <main
       className={`destination-page theme-${destination.theme} min-h-screen`}
+      style={getDestinationThemeStyle(destination)}
     >
       <ResortHero destination={destination} />
 

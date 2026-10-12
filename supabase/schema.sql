@@ -48,6 +48,14 @@ create table if not exists public.resorts (
   about_image text not null,
   image text not null,
   accent text not null,
+  hero_gradient_color text not null default '#0d0e0b',
+  theme_background text not null default '#251b14',
+  theme_text text not null default '#f7d9a6',
+  content_background text not null default '#ffffff',
+  content_text text not null default '#57351d',
+  surface_color text not null default '#fcf6eb',
+  muted_color text not null default '#875f39',
+  line_color text not null default '#d2b47e',
   logo text not null,
   logo_mark text not null,
   map_url text not null,
@@ -71,6 +79,68 @@ alter table public.resorts
 
 alter table public.resorts
   add column if not exists restaurant_gallery_configured boolean not null default false;
+
+alter table public.resorts
+  add column if not exists hero_gradient_color text,
+  add column if not exists theme_background text not null default '#251b14',
+  add column if not exists theme_text text not null default '#f7d9a6',
+  add column if not exists content_background text not null default '#ffffff',
+  add column if not exists content_text text not null default '#57351d',
+  add column if not exists surface_color text not null default '#fcf6eb',
+  add column if not exists muted_color text not null default '#875f39',
+  add column if not exists line_color text not null default '#d2b47e';
+
+update public.resorts
+set hero_gradient_color = case slug
+  when 'guru' then '#183b28'
+  when 'alungoo' then '#6e3a21'
+  else '#0d0e0b'
+end
+where hero_gradient_color is null;
+
+alter table public.resorts
+  alter column hero_gradient_color set default '#0d0e0b',
+  alter column hero_gradient_color set not null;
+
+update public.resorts
+set
+  hero_gradient_color = case
+    when slug = 'alungoo' and hero_gradient_color in ('#0d0e0b', '#4c2d20') then '#6e3a21'
+    when slug = 'hoyorzagal' and hero_gradient_color = '#f7d9a6' then '#0d0e0b'
+    else hero_gradient_color
+  end,
+  theme_background = case
+    when slug = 'alungoo' and theme_background = '#251b14' then '#d9a06f'
+    when slug = 'guru' and theme_background = '#251b14' then '#e8f0e2'
+    else theme_background
+  end,
+  theme_text = case
+    when slug = 'alungoo' and theme_text = '#f7d9a6' then '#4c2d20'
+    when slug = 'guru' and theme_text = '#f7d9a6' then '#183b28'
+    else theme_text
+  end,
+  content_text = case
+    when slug = 'alungoo' and content_text in ('#57351d', '#4c2d20') then '#6e3a21'
+    when slug = 'guru' and content_text = '#57351d' then '#183b28'
+    when slug = 'hoyorzagal' and content_text = '#f7d9a6' then '#57351d'
+    else content_text
+  end,
+  surface_color = case
+    when slug = 'alungoo' and surface_color = '#fcf6eb' then '#fff5e9'
+    when slug = 'guru' and surface_color = '#fcf6eb' then '#f1f6ed'
+    else surface_color
+  end,
+  muted_color = case
+    when slug = 'alungoo' and muted_color = '#875f39' then '#9b6b4a'
+    when slug = 'guru' and muted_color = '#875f39' then '#66806b'
+    else muted_color
+  end,
+  line_color = case
+    when slug = 'alungoo' and line_color = '#d2b47e' then '#c58c5e'
+    when slug = 'guru' and line_color = '#d2b47e' then '#a9c0a6'
+    else line_color
+  end
+where slug in ('hoyorzagal', 'alungoo', 'guru');
 
 create table if not exists public.resort_accommodations (
   id uuid primary key default gen_random_uuid(),
