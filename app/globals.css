@@ -98,6 +98,11 @@ html {
   font-family: "Noto Sans", Arial, sans-serif;
 }
 
+.destination-page .activities-swiper {
+  --swiper-pagination-color: var(--camp-accent);
+  --swiper-pagination-bullet-inactive-color: var(--camp-accent);
+}
+
 .theme-alungoo {
   --camp-theme-background: #d9a06f;
   --camp-theme-text: #4c2d20;
