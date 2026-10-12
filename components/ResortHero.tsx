@@ -20,7 +20,9 @@ export default function ResortHero({
     <section
       className={[
         "relative overflow-hidden",
-        preview ? "aspect-[2/1] w-full" : "h-[78vh] min-h-[620px]",
+        preview
+          ? "destination-hero-preview aspect-[1.6/1] w-full"
+          : "h-[78vh] min-h-[620px]",
       ].join(" ")}
     >
       <img
@@ -48,15 +50,17 @@ export default function ResortHero({
       )}
       <div
         className={[
-          "absolute left-6 top-6 z-10",
-          preview ? "md:left-7 md:top-7" : "md:left-10 md:top-10",
+          "absolute z-10",
+          preview
+            ? "destination-hero-preview-logo-position"
+            : "left-6 top-6 md:left-10 md:top-10",
         ].join(" ")}
       >
         <div
           className={[
             "flex shrink-0 items-center justify-center overflow-hidden rounded-full border-[2px] bg-white shadow-2xl",
             preview
-              ? "h-16 w-16 p-2 md:h-20 md:w-20"
+              ? "destination-hero-preview-logo"
               : "h-24 w-24 p-2 md:h-32 md:w-32 md:p-4",
           ].join(" ")}
           style={{
@@ -94,13 +98,20 @@ export default function ResortHero({
       </div>
       <div
         className={[
-          "absolute bottom-12 left-6 z-10 items-end gap-4 text-white md:gap-6",
-          preview ? "md:left-7 bottom-6" : "md:left-12",
+          "absolute z-10 text-white",
+          preview
+            ? "destination-hero-preview-content"
+            : "bottom-12 left-6 md:left-12",
         ].join(" ")}
       >
         <div>
           <p
-            className="mb-3 inline-flex rounded-sm border px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.4em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] shadow-lg backdrop-blur-sm"
+            className={[
+              "inline-flex rounded-sm border font-semibold uppercase text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] shadow-lg backdrop-blur-sm",
+              preview
+                ? "destination-hero-preview-eyebrow"
+                : "mb-3 px-3 py-2 text-[10px] tracking-[0.4em]",
+            ].join(" ")}
             style={{
               backgroundColor: `color-mix(in srgb, ${destination.accent} 55%, transparent)`,
               borderColor: `color-mix(in srgb, ${destination.accent} 80%, transparent)`,
@@ -111,12 +122,21 @@ export default function ResortHero({
           <h1
             className={[
               "font-sans font-normal",
-              preview ? "text-4xl md:text-5xl" : "text-6xl md:text-[120px]",
+              preview
+                ? "destination-hero-preview-title"
+                : "text-6xl md:text-[120px]",
             ].join(" ")}
           >
             {destination.name}
           </h1>
-          <p className="mt-4 text-xs uppercase tracking-[0.3em] text-white/80">
+          <p
+            className={[
+              "uppercase text-white/80",
+              preview
+                ? "destination-hero-preview-region"
+                : "mt-4 text-xs tracking-[0.3em]",
+            ].join(" ")}
+          >
             {destination.region}
           </p>
         </div>

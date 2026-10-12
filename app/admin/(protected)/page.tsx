@@ -1,21 +1,69 @@
 import Link from "next/link";
 import { destinations } from "@/data/destinations";
+import {
+  formatLastUpdated,
+  getAdminDashboardStats,
+} from "@/lib/admin-dashboard";
+import { getAllResortContent, getIntroContent } from "@/lib/site-content";
 
-const statCards = [
-  { label: "Total Camps", value: "3", meta: "Active", icon: "△" },
-  { label: "Total Images", value: "24", meta: "Uploaded", icon: "◫" },
-  { label: "Total Pages", value: "3", meta: "Published", icon: "🗂" },
-  { label: "Last Updated", value: "2 min ago", meta: "Oct 10, 2026", icon: "◔" },
-];
+export default async function AdminDashboardPage() {
+  const [stats, resortContent, introContent] = await Promise.all([
+    getAdminDashboardStats(),
+    getAllResortContent(),
+    getIntroContent(),
+  ]);
+  const lastUpdated = formatLastUpdated(stats.lastUpdatedAt);
+  const quickAccess = [
+    {
+      name: "INTRO PAGE",
+      href: "/admin/intro",
+      image: introContent.heroImage,
+    },
+    ...(["alungoo", "hoyorzagal", "guru"] as const).flatMap((slug) => {
+      const resort = resortContent.find((item) => item.slug === slug);
+      return resort
+        ? [
+            {
+              name: resort.name,
+              href: `/admin/resorts/${resort.slug}`,
+              image: resort.image,
+            },
+          ]
+        : [];
+    }),
+  ];
 
-const quickAccess = [
-  { name: "ALUNGOO", href: `/admin/resorts/${destinations[1]?.slug ?? "alungoo"}`, image: destinations[1]?.image ?? "/images/alungoo/30.JPG" },
-  { name: "HOYOR ZAGAL", href: `/admin/resorts/${destinations[0]?.slug ?? "hoyorzagal"}`, image: destinations[0]?.image ?? "/images/hoyorzagal/31.JPG" },
-  { name: "GURU ECO COMPLEX", href: `/admin/resorts/${destinations[2]?.slug ?? "guru"}`, image: destinations[2]?.image ?? "/images/guru/7.JPG" },
-  { name: "INTRO PAGE", href: "/admin/intro", image: "/images/alungoo/30.JPG" },
-];
+  const statCards = [
+    {
+      label: "Total Camps",
+      value: String(stats.totalCamps),
+      meta: "Active",
+      icon: "△",
+    },
+    {
+      label: "Camps Missing Information",
+      value:
+        stats.incompleteCamps === null ? "—" : String(stats.incompleteCamps),
+      meta:
+        stats.incompleteCamps === null
+          ? "Database unavailable"
+          : "Contact, location, stay or activity incomplete",
+      icon: "◫",
+    },
+    {
+      label: "Total Pages",
+      value: String(destinations.length),
+      meta: "Published",
+      icon: "🗂",
+    },
+    {
+      label: "Last Updated",
+      value: lastUpdated.value,
+      meta: lastUpdated.meta,
+      icon: "◔",
+    },
+  ];
 
-export default function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4">
@@ -33,13 +81,15 @@ export default function AdminDashboardPage() {
             A
           </div>
           <div className="text-right leading-tight">
-            <div className="text-[13px] font-semibold text-[#1d2124]">Admin</div>
+            <div className="text-[13px] font-semibold text-[#1d2124]">
+              Admin
+            </div>
             <div className="text-[11px] text-[#6b7379]">Super Admin</div>
           </div>
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      {/* <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {statCards.map((card) => (
           <div
             key={card.label}
@@ -52,16 +102,19 @@ export default function AdminDashboardPage() {
               </span>
             </div>
             <div className="flex items-end justify-between gap-3">
-              <div className="text-[30px] font-semibold tracking-tight text-[#1a1d20]">{card.value}</div>
+              <div className="text-[30px] font-semibold tracking-tight text-[#1a1d20]">
+                {card.value}
+              </div>
               <div className="text-[12px] text-[#59676d]">{card.meta}</div>
             </div>
           </div>
         ))}
-      </div>
-
+      </div> */}
       <div className="rounded-[18px] border border-[#eae5df] bg-[#f7f6f4] p-4 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-[28px] font-semibold tracking-tight text-[#1c2124]">Quick Access</h2>
+          <h2 className="text-[28px] font-semibold tracking-tight text-[#1c2124]">
+            Quick Access
+          </h2>
           <button className="text-[12px] font-medium uppercase tracking-[0.18em] text-[#4f5a62]">
             View all →
           </button>
@@ -74,10 +127,16 @@ export default function AdminDashboardPage() {
               className="overflow-hidden rounded-[18px] border border-[#e4e2df] bg-[#f0efe9] shadow-sm"
             >
               <div className="relative h-[150px] overflow-hidden">
-                <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/35" />
                 <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                  <div className="text-[18px] font-semibold tracking-tight">{item.name}</div>
+                  <div className="text-[18px] font-semibold tracking-tight">
+                    {item.name}
+                  </div>
                 </div>
               </div>
               <div className="p-3">

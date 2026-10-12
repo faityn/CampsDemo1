@@ -30,6 +30,51 @@ html {
   scroll-behavior: smooth;
 }
 
+.destination-hero-preview {
+  container-type: inline-size;
+  min-height: 180px;
+}
+
+.destination-hero-preview-logo-position {
+  top: clamp(0.75rem, 4cqi, 1.75rem);
+  left: clamp(0.75rem, 4cqi, 1.75rem);
+}
+
+.destination-hero-preview-logo {
+  width: clamp(2.75rem, 12cqi, 5rem);
+  height: clamp(2.75rem, 12cqi, 5rem);
+  padding: clamp(0.375rem, 2cqi, 0.75rem);
+}
+
+.destination-hero-preview-content {
+  right: clamp(0.75rem, 4cqi, 1.75rem);
+  bottom: clamp(0.75rem, 3cqi, 1.5rem);
+  left: clamp(0.75rem, 4cqi, 1.75rem);
+}
+
+.destination-hero-preview-eyebrow {
+  max-width: 100%;
+  margin-bottom: clamp(0.375rem, 1.5cqi, 0.75rem);
+  padding: clamp(0.25rem, 1cqi, 0.5rem) clamp(0.375rem, 1.5cqi, 0.75rem);
+  font-size: clamp(0.45rem, 1.7cqi, 0.625rem);
+  letter-spacing: clamp(0.08em, 0.9cqi, 0.25em);
+  line-height: 1.4;
+}
+
+.destination-hero-preview-title {
+  overflow-wrap: anywhere;
+  font-size: clamp(1.25rem, 7cqi, 3rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.destination-hero-preview-region {
+  margin-top: clamp(0.375rem, 1.5cqi, 1rem);
+  font-size: clamp(0.5rem, 1.8cqi, 0.75rem);
+  letter-spacing: clamp(0.08em, 0.8cqi, 0.3em);
+  line-height: 1.4;
+}
+
 .destination-page {
   --bg: var(--camp-theme-background);
   --surface: var(--camp-surface);

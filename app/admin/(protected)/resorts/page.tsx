@@ -1,14 +1,42 @@
 import Link from "next/link";
 import { destinations } from "@/data/destinations";
+import {
+  formatLastUpdated,
+  getAdminDashboardStats,
+} from "@/lib/admin-dashboard";
 
-const stats = [
-  { label: "Total Camps", value: "3", meta: "Active" },
-  { label: "Total Images", value: "24", meta: "Uploaded" },
-  { label: "Total Pages", value: "3", meta: "Published" },
-  { label: "Last Updated", value: "2 min ago", meta: "Oct 10, 2026" },
-];
+export default async function ResortsAdminPage() {
+  const dashboardStats = await getAdminDashboardStats();
+  const lastUpdated = formatLastUpdated(dashboardStats.lastUpdatedAt);
+  const stats = [
+    {
+      label: "Total Camps",
+      value: String(dashboardStats.totalCamps),
+      meta: "Active",
+    },
+    {
+      label: "Camps Missing Information",
+      value:
+        dashboardStats.incompleteCamps === null
+          ? "—"
+          : String(dashboardStats.incompleteCamps),
+      meta:
+        dashboardStats.incompleteCamps === null
+          ? "Database unavailable"
+          : "Contact, location, stay or activity incomplete",
+    },
+    {
+      label: "Total Pages",
+      value: String(destinations.length),
+      meta: "Published",
+    },
+    {
+      label: "Last Updated",
+      value: lastUpdated.value,
+      meta: lastUpdated.meta,
+    },
+  ];
 
-export default function ResortsAdminPage() {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between gap-4">

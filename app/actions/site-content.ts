@@ -282,6 +282,7 @@ export async function saveIntroContent(formData: FormData) {
 
   const payload = {
     slug: "home",
+    updated_at: new Date().toISOString(),
     eyebrow_en: getString(formData, "eyebrow", defaultIntroContent.eyebrow),
     eyebrow_mn: getString(formData, "eyebrowMn", defaultIntroContent.eyebrow),
     tagline_en: getString(formData, "tagline", defaultIntroContent.tagline),
@@ -397,6 +398,7 @@ export async function saveResortContent(formData: FormData) {
 
   const resortPayload = {
     slug,
+    updated_at: new Date().toISOString(),
     name_en: getString(formData, "name", fallback.name),
     name_mn: getString(formData, "nameMn", fallback.name),
     region_en: getString(formData, "region", fallback.region),
