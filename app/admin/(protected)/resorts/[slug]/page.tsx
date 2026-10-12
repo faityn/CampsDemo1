@@ -734,6 +734,15 @@ export default function ResortDetailPage() {
     if (activeTab === "accommodation") {
       return (
         <div className="space-y-4">
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={addAccommodation}
+              className="rounded-full bg-[#1b3b34] px-4 py-2 text-sm font-medium text-white"
+            >
+              + Add Accommodation
+            </button>
+          </div>
           {form.stay.map((stay, index) => (
             <div
               key={`${stay.title}-${index}`}
@@ -981,6 +990,15 @@ export default function ResortDetailPage() {
     if (activeTab === "activities") {
       return (
         <div className="space-y-4">
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={addActivity}
+              className="rounded-full bg-[#1b3b34] px-4 py-2 text-sm font-medium text-white"
+            >
+              + Add Activity
+            </button>
+          </div>
           {form.activities.map((activity, index) => (
             <div
               key={`${activity.title}-${index}`}

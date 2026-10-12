@@ -1,4 +1,5 @@
 import { destinations, type Destination } from "@/data/destinations";
+import { localizeDestination } from "@/data/destination-locales";
 import { createSupabaseClient } from "@/lib/supabase";
 import sanitizeHtml from "sanitize-html";
 
@@ -254,6 +255,7 @@ export async function getResortContent(slug: string): Promise<Destination | unde
   }
 
   const resort = stored.resort;
+  const fallbackMn = localizeDestination(fallback, "mn");
   const aboutText = (stored.aboutText ?? []).map((item: { paragraph_en?: string; paragraph_mn?: string; paragraph?: string }) =>
     pickText(item, "paragraph", "", "en") || item.paragraph || "",
   );
@@ -290,7 +292,7 @@ export async function getResortContent(slug: string): Promise<Destination | unde
     eyebrow: pickText(resort, "eyebrow", fallback.eyebrow, "en"),
     eyebrowMn: pickText(resort, "eyebrow", fallback.eyebrow, "mn"),
     signature: pickText(resort, "signature", fallback.signature, "en"),
-    signatureMn: pickText(resort, "signature", fallback.signature, "mn"),
+    signatureMn: pickText(resort, "signature", fallbackMn.signature, "mn"),
     description: sanitizeRichText(pickText(resort, "description", fallback.description, "en")),
     descriptionMn: sanitizeRichText(pickText(resort, "description", fallback.description, "mn")),
     aboutText: (aboutText.length > 0 ? aboutText : fallback.aboutText).map(sanitizeRichText),

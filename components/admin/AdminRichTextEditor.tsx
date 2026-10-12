@@ -1,6 +1,11 @@
 "use client";
 
-import { Editor } from "@tinymce/tinymce-react";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(
+  () => import("@tinymce/tinymce-react").then((module) => module.Editor),
+  { ssr: false },
+);
 
 export default function AdminRichTextEditor({
   value,
@@ -16,7 +21,7 @@ export default function AdminRichTextEditor({
       <textarea
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="min-h-[150px] w-full rounded-md border border-[#dfe2df] bg-white px-3 py-2.5 text-sm text-[#1a1d20] outline-none focus:border-[#9a7653]"
+        className="min-h-[250px] w-full rounded-md border border-[#dfe2df] bg-white px-3 py-2.5 text-sm text-[#1a1d20] outline-none focus:border-[#9a7653]"
       />
     );
   }
@@ -27,7 +32,7 @@ export default function AdminRichTextEditor({
       apiKey={apiKey}
       onEditorChange={onChange}
       init={{
-        height: 180,
+        height: 250,
         menubar: false,
         plugins: "lists",
         toolbar:

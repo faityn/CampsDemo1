@@ -279,6 +279,9 @@ export function localizeDestination(
   return {
     ...destination,
     ...translation,
+    signature: destination.signatureMn?.trim()
+      ? destination.signatureMn
+      : translation.signature,
     aboutText: destination.aboutTextMn ?? translation.aboutText,
     activities:
       destination.activitiesMn === undefined

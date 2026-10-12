@@ -202,7 +202,7 @@ export default function Intro({
                       <h3 className="font-sans font-normal text-5xl">{d.name}</h3>
                       <div className="mt-5 flex items-center justify-between gap-5">
                         <p className="max-w-sm text-xs leading-5 text-white/65">
-                          {d.description}
+                          {d.signature}
                         </p>
                         <span className="shrink-0 text-[10px] uppercase tracking-[0.22em] transition-transform group-hover:translate-x-2">
                           {t("home.explore")} →
