@@ -7,6 +7,9 @@ export const metadata = {
   title: "Mongolian Camps | Монголын аяллын баазууд",
   description:
     "Discover distinctive stays across Mongolia. Монгол орны өвөрмөц аяллын баазуудтай танилцаарай.",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
